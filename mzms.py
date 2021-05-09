@@ -9,6 +9,8 @@ from qm import ad as op_ad
 from qm import f_ as op_f_
 from qm import fd as op_fd
 
+from qm import prepareMeasurementOperators, measure
+
 from plotting import plotMeasurement
 
 # huehuehue
@@ -25,7 +27,6 @@ a_ = lambda n: op_a_(L, n, Opers=Opers)
 ad = lambda n: op_ad(L, n, Opers=Opers)
 f_ = lambda gi, i, gj, j: op_f_(L, gi, i, gj, j, Opers=Opers)
 fd = lambda gi, i, gj, j: op_fd(L, gi, i, gj, j, Opers=Opers)
-N = lambda gi, i, gj, j: fd(gi, i, gj, j)*f_(gi, i, gj, j)
 
 # produce a vacuum state
 
@@ -50,25 +51,7 @@ energy_trivial = expect(H(2., 0., 0.), filled)
 print('Energy of the trivial regime is', energy_trivial)
 
 # prepare the measurement operators
-indices = []
-measure_operators = []
-for i in range(L):
-    for si, gi in [('l', gl), ('r', gr)]:
-        for j in range(L):
-            for sj, gj in [('l', gl), ('r', gr)]:
-                label = str(i) + si + str(j) + sj
-                index = (i, si, j, sj, label)
-                operator = N(gi, i, gj, j)
-                indices.append(index)
-                measure_operators.append(operator)
-
-# function that calculates probability of measuring each pairing
-def measure(psi, measure):
-    ps = []
-    for operator in measure:
-        p = np.abs(expect(operator, psi))**2.
-        ps.append(p)
-    return ps
+indices, measure_operators = prepareMeasurementOperators(L)
 
 # prepare the simulation
 tau = 10.*np.pi
