@@ -5,3 +5,5 @@ Introduction to numerical simulations of the Kitaev Chain and detection of the M
 [Majorana Zero Modes](https://mareknarozniak.com/2021/04/09/mzms/) by Marek Narozniak
 
 [Topological phase transitions by braiding](https://mareknarozniak.com/2021/05/09/braiding/)
+
+[Majorana qubits](https://mareknarozniak.com/2021/06/09/majorana-qubits/)

@@ -65,3 +65,16 @@ def plotMeasurement(L, indices, measurements, s=0.25, filename=None, title=None,
         x_title.set_visible(True)
         y_title.set_visible(False)
         fig.savefig(filename + '_135.png', transparent=True, bbox_inches='tight', pad_inches=0)
+
+
+def plotExpectations(times, expects, labels, colors, styles, linewidths, title, filename, axvlines=[]):
+    fig, ax = plt.subplots(1, 1, constrained_layout=True)
+    ax.set_title(title)
+    ax.set_xlabel('t')
+    ax.grid()
+    for x in axvlines:
+        ax.axvline(x=x, color='black', linestyle='--')
+    for measurement, label, color, style, width in zip(expects, labels, colors, styles, linewidths):
+        ax.plot(times, measurement, label=label, color=color, linestyle=style, linewidth=width)
+    ax.legend()
+    fig.savefig(filename, transparent=True)
