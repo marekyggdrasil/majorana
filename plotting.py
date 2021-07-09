@@ -78,3 +78,30 @@ def plotExpectations(times, expects, labels, colors, styles, linewidths, title, 
         ax.plot(times, measurement, label=label, color=color, linestyle=style, linewidth=width)
     ax.legend()
     fig.savefig(filename, transparent=True)
+
+
+# from: https://matplotlib.org/stable/gallery/lines_bars_and_markers/barchart.html#sphx-glr-gallery-lines-bars-and-markers-barchart-py
+def plotTeleportationOutcomes(outcomes, corrs, labels, title, url=None, filename=None):
+    x = np.arange(len(labels))  # the label locations
+    width = 0.35  # the width of the bars
+
+    fig, ax = plt.subplots(1, 1, constrained_layout=True)
+    rects1 = ax.bar(x - width/2, outcomes, width, label='not corrected')
+    rects2 = ax.bar(x + width/2, corrs, width, label='corrected')
+
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax.set_ylabel('fidelity')
+    ax.set_title(title)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.legend()
+
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+
+    if url is not None:
+        ax.text(0, -0.1, url, fontsize=7)
+
+    fig.tight_layout()
+    if filename is not None:
+        fig.savefig(filename, transparent=True)

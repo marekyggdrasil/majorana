@@ -7,3 +7,5 @@ Introduction to numerical simulations of the Kitaev Chain and detection of the M
 [Topological phase transitions by braiding](https://mareknarozniak.com/2021/05/09/braiding/)
 
 [Majorana qubits](https://mareknarozniak.com/2021/06/09/majorana-qubits/)
+
+[Topological teleportation](https://mareknarozniak.com/2021/07/09/topological-teleportation/)
