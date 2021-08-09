@@ -105,3 +105,28 @@ def plotTeleportationOutcomes(outcomes, corrs, labels, title, url=None, filename
     fig.tight_layout()
     if filename is not None:
         fig.savefig(filename, transparent=True)
+
+
+def plotHbdgSpectrum(L, mus, spectrum, title, mark=None, url=None, url_x=None, url_y=None, filename=None):
+    fig, ax = plt.subplots(1, 1, constrained_layout=True)
+    ax.set_title(title)
+    ax.set_xlabel('$\mu$')
+    ax.set_ylabel('$E$')
+    ax.set_xlim(0., mus[-1])
+
+    for j in range(2*L):
+        ax.plot(mus, spectrum[:, j], color='black')
+
+    if mark is not None:
+        ax.axvline(x=mark, color='red', linestyle='--')
+
+    if url is not None:
+        pos_y = -0.1
+        if url_y is not None:
+            pos_y = url_y
+        pos_x = 0.0
+        if url_x is not None:
+            pos_x = url_x
+        ax.text(pos_x, pos_y, url, fontsize=9)
+
+    fig.savefig(filename, transparent=True)

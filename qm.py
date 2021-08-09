@@ -102,3 +102,27 @@ def Uij(L, g1, i, g2, j, start=0, Opers=None):
     ga = g1(L, i, start=start, Opers=Opers)
     gb = g2(L, j, start=start, Opers=Opers)
     return ((np.pi/4.)*ga*gb).expm()
+
+
+def Hbdg(L, mu, t, delta):
+    # sub-matrices, h-matrix
+    MH = np.zeros((L, L), dtype=np.complex128)
+    for j in range(L-1):
+        MH[j, j] = mu
+        MH[j, j+1] = np.conjugate(t)
+        MH[j+1, j] = t
+    MH[L-1, L-1] = mu
+
+    # sub-matrices, D-matrix
+    MD = np.zeros((L, L), dtype=np.complex128)
+    for j in range(L-1):
+        MD[j, j+1] = np.conjugate(1j*delta)
+        MD[j+1, j] = 1j*delta
+
+    # construct Hbdg matrix
+    Hbdg = np.kron(np.array([[1, 0], [0, 0]]), MH)
+    Hbdg += np.kron(np.array([[0, 0], [0, 1]]), -np.conjugate(MH))
+    Hbdg += np.kron(np.array([[0, 1], [0, 0]]), MD)
+    Hbdg += np.kron(np.array([[0, 0], [1, 0]]), -np.conjugate(MD))
+
+    return Hbdg
