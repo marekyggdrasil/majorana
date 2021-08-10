@@ -104,13 +104,13 @@ def Uij(L, g1, i, g2, j, start=0, Opers=None):
     return ((np.pi/4.)*ga*gb).expm()
 
 
-def Hbdg(L, mu, t, delta):
+def Hbdg(L, mu, w, delta):
     # sub-matrices, h-matrix
     MH = np.zeros((L, L), dtype=np.complex128)
     for j in range(L-1):
         MH[j, j] = mu
-        MH[j, j+1] = np.conjugate(t)
-        MH[j+1, j] = t
+        MH[j, j+1] = np.conjugate(w)
+        MH[j+1, j] = w
     MH[L-1, L-1] = mu
 
     # sub-matrices, D-matrix
